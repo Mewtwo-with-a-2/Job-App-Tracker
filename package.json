@@ -1,0 +1,19 @@
+{
+  "name": "job-app-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mewtwo-with-a-2/Job-App-Tracker.git"
+  },
+  "author": "MewTwo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mewtwo-with-a-2/Job-App-Tracker/issues"
+  },
+  "homepage": "https://github.com/Mewtwo-with-a-2/Job-App-Tracker#readme"
+}
