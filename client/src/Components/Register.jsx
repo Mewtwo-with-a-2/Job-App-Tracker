@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Button, TextField, Container, Typography, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Button, TextField, Container, Typography } from '@mui/material';
 
-
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -11,17 +10,19 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(email, password);
-      navigate('/dashboard');
+      // Call API to register user with entered credentials
+      await registerUser({ email, password });
+      // Redirect to login after successful registration
+      navigate('/');
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Registration failed:', error);
     }
   };
 
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1" gutterBottom>
-        Login
+        Register
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -41,18 +42,11 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit" variant="contained" color="primary" fullWidth>
-          Login
+          Register
         </Button>
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link to="/register" variant="body2">
-              {"Don't have an account? Register"}
-            </Link>
-          </Grid>
-        </Grid>
       </form>
     </Container>
   );
 };
 
-export default Login;
+export default Register;

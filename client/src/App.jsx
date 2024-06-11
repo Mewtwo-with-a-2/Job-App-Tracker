@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login';
+import Register from './Components/Register';
 import Dashboard from './Components/Dashboard';
 import ResumeUpload from './Components/ResumeUpload';
 import ResumeList from './Components/ResumeList';
@@ -16,6 +17,7 @@ const App = () => {
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} /> 
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/upload" element={<ResumeUpload />} />
         <Route path="/resumes" element={<ResumeList />} />

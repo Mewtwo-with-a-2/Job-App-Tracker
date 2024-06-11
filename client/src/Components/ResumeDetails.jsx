@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Typography, Button } from '@mui/material';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Container, Typography, Button, List, ListItem, ListItemText } from '@mui/material';
 
 const ResumeDetails = () => {
   const { id } = useParams();
   const [resume, setResume] = useState(null);
+  const [relatedResumes, setRelatedResumes] = useState([]);
+  const navigate = useNavigate();
+
   // Fetch resume details from the API when the component mounts or ID changes
   useEffect(() => {
     const getResume = async () => {
@@ -16,7 +19,19 @@ const ResumeDetails = () => {
       }
     };
 
+    const getRelatedResumes = async () => {
+      try {
+        const response = await fetchResumes();
+        // Filter out the current resume and set the related resumes
+        const related = response.data.filter(res => res.id !== id);
+        setRelatedResumes(related);
+      } catch (error) {
+        console.error('Failed to fetch related resumes:', error);
+      }
+    };
+
     getResume();
+    getRelatedResumes();
   }, [id]);
 
   return (
@@ -35,6 +50,19 @@ const ResumeDetails = () => {
           </Button>
         </div>
       )}
+      <Button variant="outlined" onClick={() => navigate('/resumes')} style={{ marginTop: '20px' }}>
+        Back to Resumes
+      </Button>
+      <Typography variant="h5" component="h2" style={{ marginTop: '20px' }}>
+        Related Resumes
+      </Typography>
+      <List>
+        {relatedResumes.map((relatedResume) => (
+          <ListItem button component={Link} to={`/resumes/${relatedResume.id}`} key={relatedResume.id}>
+            <ListItemText primary={`${relatedResume.jobTitle} at ${relatedResume.company}`} />
+          </ListItem>
+        ))}
+      </List>
     </Container>
   );
 };
