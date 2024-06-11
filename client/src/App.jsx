@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Components/Login';
-import Register from './Components/Register';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
 import Dashboard from './Components/Dashboard';
 import ResumeUpload from './Components/ResumeUpload';
 import ResumeList from './Components/ResumeList';
 import ResumeDetails from './Components/ResumeDetails';
 import Header from './Components/Header';
-import PrivateRoute from './Components/PrivateRoute';
+import PrivateRoute from './Pages/PrivateRoute';
 
 import { Container } from '@mui/material';
 
