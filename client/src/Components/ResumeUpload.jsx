@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, TextField, Container, Typography } from '@mui/material';
+import { Button, TextField, Container, Typography, Box } from '@mui/material';
 
 // Manage form inputs and file selection
 const ResumeUpload = () => {
@@ -47,22 +47,26 @@ const ResumeUpload = () => {
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
-        <Button
-          variant="contained"
-          component="label"
-          fullWidth
-          margin="normal"
-        >
-          Upload File
-          <input
-            type="file"
-            hidden
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </Button>
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Upload
-        </Button>
+        <Box mt={2}>
+          <Button
+            variant="contained"
+            component="label"
+            fullWidth
+            margin="normal"
+          >
+            Upload File
+            <input
+              type="file"
+              hidden
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+          </Button>
+        </Box>
+        <Box mt={2}>
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Upload
+          </Button>
+        </Box>
       </form>
     </Container>
   );
