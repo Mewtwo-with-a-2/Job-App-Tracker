@@ -1,44 +1,28 @@
 import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Components/Login';
+import Dashboard from './Components/Dashboard';
+import ResumeUpload from './Components/ResumeUpload';
+import ResumeList from './Components/ResumeList';
+import ResumeDetails from './Components/ResumeDetails';
 
+// Define the main structure and routing of the application
 const App = () => {
-  const [count, setCount] = useState(0);
-
+  // Define routes for different components 
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Vite + React</h1>
-        <p>
-          <button onClick={() => setCount(count => count + 1)}>
-            count is {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://react.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/upload" element={<ResumeUpload />} />
+        <Route path="/resumes" element={<ResumeList />} />
+        <Route path="/resumes/:id" element={<ResumeDetails />} />
+      </Routes>
     </div>
+  </Router>
   );
 };
 
