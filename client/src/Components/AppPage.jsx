@@ -96,7 +96,7 @@ function AppPage() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
+            <Typography component='div' variant='h4' color='inherit' noWrap sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
           </Toolbar>
