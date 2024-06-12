@@ -10,32 +10,23 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(email, password);
-      onLogin();
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
-  
-  const handleRegister = async () => {
-    try {
-      const response = await fetch('/accounts/register', {
+      const response = await fetch('http://localhost:3000/accounts/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }), 
+        body: JSON.stringify({ email, password }),
       });
-
       if (response.ok) {
-        console.log('Registration successful');
+        const data = await response.json();
+        onLogin();
+        navigate('/dashboard');
       } else {
         const data = await response.json();
-        console.error('Registration failed:', data.message);
+        console.error('Login failed:', data.message);
       }
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('Login failed:', error);
     }
   };
 

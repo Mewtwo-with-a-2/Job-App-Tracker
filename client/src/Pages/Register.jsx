@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, TextField, Container, Typography, Grid, Paper } from '@mui/material';
+import { Button, TextField, Container, Typography, Grid, Paper, Snackbar } from '@mui/material';
 
 const Register = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  // test
+  const [open, setOpen] = useState(false); 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await registerUser({ email, password });
-      navigate('/');
-    } catch (error) {
-      console.error('Registration failed:', error);
-    }
+  const handleSubmit = async (e) => { 
+    e.preventDefault(); 
+    try { 
+      const response = await fetch('/accounts/register', 
+      { method: 'POST', 
+      headers: { 'Content-Type': 'application/json', }, 
+      body: JSON.stringify({ username, email, password }), }); 
+      if (response.ok) { 
+        // test
+        setOpen(true); 
+        setTimeout(() => {
+          navigate('/');
+        }, 2000); 
+        // navigate('/'); 
+      } 
+      else { console.error('Registration failed'); } } 
+      catch (error) { console.error('Registration failed:', error); } 
   };
 
   return (
@@ -24,6 +36,14 @@ const Register = () => {
           Register
         </Typography>
         <form onSubmit={handleSubmit}>
+        <TextField
+            label="Username"
+            type="text"
+            fullWidth
+            margin="normal"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <TextField
             label="Email"
             type="email"

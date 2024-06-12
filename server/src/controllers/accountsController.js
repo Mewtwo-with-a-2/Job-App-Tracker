@@ -62,6 +62,8 @@ accountsController. addNewUser = async (req, res, next) => {
         const newUser = await DB.query(text, params);
         console.log('new user is here');
         res.locals.newUser = newUser.rows[0];
+        // test1    
+        return res.status(201).json({ message: 'User registered successfully' });
         return next();
     } catch(error) {
         return next({

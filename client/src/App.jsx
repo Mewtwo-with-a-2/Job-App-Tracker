@@ -9,8 +9,6 @@ import ResumeUpload from './Components/ResumeUpload';
 import ResumeList from './Components/ResumeList';
 import ResumeDetails from './Components/ResumeDetails';
 import Header from './Components/Header';
-import PrivateRoute from './Pages/PrivateRoute';
-
 import { Container } from '@mui/material';
 
 const App = () => {
