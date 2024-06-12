@@ -3,17 +3,18 @@
   "version": "1.4.0",
   "type": "module",
   "scripts": {
-    "start": "vite --port 3000 --open",
-    "dev": "vite --port 3000 --open",
-    "build": "vite build",
-    "serve": "vite preview --open",
+    "start": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && cd src && nodemon index.js",
+    "dev:client": "cd client && npm run dev",
     "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.19",
+    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
+    "express": "^4.19.2",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1"

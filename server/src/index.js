@@ -1,23 +1,27 @@
-import express from "express";
-import path from "path";
-import dotenv from "dotenv";
-import resumeRouter from "./routes/resumes";
-import accountsRouter from "./routes/accounts";
-import applicationsRouter from "./routes/applications";
-import cors from "cors"; 
+import express from 'express';
+import path from 'path';
+import dotenv from 'dotenv';
+import resumeRouter from './routes/resumes.js';
+import accountsRouter from './routes/accounts.js';
+import applicationsRouter from './routes/applications.js';
+import cors from 'cors';
+import { fileURLToPath } from 'url';
 
-app.use(cors()); 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
-app.use(express.static(path(__dirname, '../client')));
 
-app.get('/', (req,res) => {
-  res.send('The server is running!')
-})
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, '../client')));
+
+app.get('/', (req, res) => {
+  res.send('The server is running!');
+});
 
 // app.use(
 //   session({
@@ -37,9 +41,9 @@ app.use((err, req, res, next) => {
   // test
   console.log('Request received:', req.method, req.url);
   const defaultErr = {
-    log: "Express error handler caught unknown middleware error",
+    log: 'Express error handler caught unknown middleware error',
     status: 500,
-    message: { err: An 'error occurred' }
+    message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
