@@ -16,30 +16,13 @@ resumeController.testDBConnection = async () => {
   }
 };
 
-// resumeController.getResumes = async (req, res, next) => {
-//   try {
-//     const pullResumes = "SELECT * FROM resumes";
-//     const result = await DB.query(pullResumes);
-//     console.log(result);
-//   } catch (err) {
-//     console.log("Error in getResumes function: " + err);
-//   }
-// };
-
-// test
 resumeController.getResumes = async (req, res, next) => {
   try {
     const pullResumes = "SELECT * FROM resumes";
     const result = await DB.query(pullResumes);
-    res.status(200).json(result.rows); 
-    return next();
+    console.log(result);
   } catch (err) {
     console.log("Error in getResumes function: " + err);
-    return next({
-      log: "Error in getResumes function",
-      status: 500,
-      message: { err: "Error fetching resumes" },
-    });
   }
 };
 

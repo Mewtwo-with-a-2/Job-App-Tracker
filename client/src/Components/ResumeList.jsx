@@ -27,30 +27,30 @@ const ResumeList = () => {
     getResumes();
   }, []);
 
-  // test
-  useEffect(() => {
-    const testDBConnection = async () => {
-      try {
-        const response = await fetch('/resumes/testdb');
-        if (response.ok) {
-          const responseData = await response.text(); 
-          try {
-            const data = JSON.parse(responseData); 
-            console.log('Database connection successful:', data);
-          } catch (error) {
-            console.error('Failed to parse JSON data:', error);
-          }
-        } else {
-          const errorText = await response.text(); 
-          console.error('Failed to test database connection:', errorText);
-        }
-      } catch (error) {
-        console.error('Failed to test database connection:', error);
-      }
-    };
+  // // test
+  // useEffect(() => {
+  //   const testDBConnection = async () => {
+  //     try {
+  //       const response = await fetch('/resumes/testdb');
+  //       if (response.ok) {
+  //         const responseData = await response.text(); 
+  //         try {
+  //           const data = JSON.parse(responseData); 
+  //           console.log('Database connection successful:', data);
+  //         } catch (error) {
+  //           console.error('Failed to parse JSON data:', error);
+  //         }
+  //       } else {
+  //         const errorText = await response.text(); 
+  //         console.error('Failed to test database connection:', errorText);
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to test database connection:', error);
+  //     }
+  //   };
   
-    testDBConnection();
-  }, []);
+  //   testDBConnection();
+  // }, []);
 
   if (loading) {
     return <div>Loading...</div>; 

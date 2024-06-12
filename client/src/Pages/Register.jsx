@@ -9,26 +9,32 @@ const Register = () => {
   const navigate = useNavigate();
   // test
   const [open, setOpen] = useState(false); 
+  const [message, setMessage] = useState('')
 
-  const handleSubmit = async (e) => { 
-    e.preventDefault(); 
-    try { 
-      const response = await fetch('/accounts/register', 
-      { method: 'POST', 
-      headers: { 'Content-Type': 'application/json', }, 
-      body: JSON.stringify({ username, email, password }), }); 
-      if (response.ok) { 
-        // test
-        setOpen(true); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/accounts/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password }),
+      });
+      if (response.ok) {
+        const data = await response.json(); 
+        setOpen(true);
+        setMessage(data.message); 
         setTimeout(() => {
           navigate('/');
-        }, 2000); 
-        // navigate('/'); 
-      } 
-      else { console.error('Registration failed'); } } 
-      catch (error) { console.error('Registration failed:', error); } 
+        }, 2000);
+      } else {
+        const errorMessage = await response.text(); 
+        console.error('Registration failed errorMessage:', errorMessage);
+      }
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
-
+  
   return (
     <Container maxWidth="xs">
       <Paper elevation={3} style={{ padding: 20 }}>

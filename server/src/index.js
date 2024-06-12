@@ -34,6 +34,8 @@ app.use('/resumes', resumeRouter);
 
 //Global error handler
 app.use((err, req, res, next) => {
+  // test
+  console.log('Request received:', req.method, req.url);
   const defaultErr = {
     log: "Express error handler caught unknown middleware error",
     status: 500,

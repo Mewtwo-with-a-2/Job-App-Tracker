@@ -9,29 +9,10 @@ router.post(
   resumeController.saveResume
 );
 
-// router.get('/', resumeController.getResumes), (req, res) => {
-//   return res.status(200).json(res.locals.allResumes);
-// };
-// test
-router.get('/', async (req, res) => {
-  try {
-    const resumes = await resumeController.getResumes(); 
-    return res.status(200).json(resumes); 
-  } catch (error) {
-    console.error('Failed to fetch resumes:', error);
-    return res.status(500).json({ error: 'Failed to fetch resumes' });
-  }
-});
+router.get('/', resumeController.getResumes), (req, res) => {
+  return res.status(200).json(res.locals.allResumes);
+};
 
-// test
-router.get('/testdb', async (req, res) => {
-  try {
-    const result = await resumeController.testDBConnection();
-    res.status(200).json(result); 
-  } catch (error) {
-    console.error('Failed to test database connection:', error);
-    res.status(500).json({ error: 'Failed to test database connection' });
-  }
-});
+
 
 module.exports = resumeRouter;
