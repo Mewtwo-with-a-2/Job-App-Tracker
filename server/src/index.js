@@ -4,17 +4,20 @@ import dotenv from "dotenv";
 import resumeRouter from "./routes/resumes";
 import accountsRouter from "./routes/accounts";
 import applicationsRouter from "./routes/applications";
+import cors from "cors"; 
+
+app.use(cors()); 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static(path(__dirname, "../client")));
+app.use(express.static(path(__dirname, '../client')));
 
-// app.get('/', (req,res) => {
-//   res.send('')
-// })
+app.get('/', (req,res) => {
+  res.send('The server is running!')
+})
 
 // app.use(
 //   session({
@@ -27,14 +30,14 @@ app.use(express.static(path(__dirname, "../client")));
 
 app.use('/accounts', accountsRouter);
 app.use('/applications', applicationsRouter);
-app.use("/resume", resumeRouter);
+app.use('/resumes', resumeRouter);
 
 //Global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: "Express error handler caught unknown middleware error",
     status: 500,
-    message: { err: "An error occurred" },
+    message: { err: An 'error occurred' }
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
@@ -42,7 +45,7 @@ app.use((err, req, res, next) => {
 });
 
 // 404 error
-app.use("*", (req, res) => {
+app.use('*', (req, res) => {
   res.sendStatus(404);
 });
 

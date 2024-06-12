@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button, TextField, Container, Typography, Grid, Paper } from '@mui/material';
 
-const Login = ({ onLogin, onOAuthLogin }) => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -11,12 +11,31 @@ const Login = ({ onLogin, onOAuthLogin }) => {
     e.preventDefault();
     try {
       await loginUser(email, password);
-      // Call onLogin to update login state
       onLogin();
-      // Navigate to the dashboard upon successful login
       navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
+    }
+  };
+  
+  const handleRegister = async () => {
+    try {
+      const response = await fetch('/accounts/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }), 
+      });
+
+      if (response.ok) {
+        console.log('Registration successful');
+      } else {
+        const data = await response.json();
+        console.error('Registration failed:', data.message);
+      }
+    } catch (error) {
+      console.error('Registration failed:', error);
     }
   };
 
