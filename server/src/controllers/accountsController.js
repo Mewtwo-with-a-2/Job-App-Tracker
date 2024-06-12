@@ -41,7 +41,6 @@ accountsController. addNewUser = async (req, res, next) => {
     const {
         username, 
         password,
-        email,
     } = req.body;
 
     try {
@@ -49,15 +48,13 @@ accountsController. addNewUser = async (req, res, next) => {
         INSERT INTO accounts (
         username, 
         password,
-        email,
         )
-        VALUES ($1, $2, $3)
+        VALUES ($1, $2)
         RETURNING *
         `;
         const params = [
             username, 
             password,
-            email,
         ];
         const newUser = await DB.query(text, params);
         console.log('new user is here');

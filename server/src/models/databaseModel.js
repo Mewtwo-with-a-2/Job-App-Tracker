@@ -13,13 +13,6 @@ export const pool = new Pool({
   port: process.env.PORT,
 });
 
-// module.exports = {
-//   query: (text, params) => {
-//     console.log('executed query', text);
-//     return pool.query(text, params);
-//   },
-// };
-
 const query = (text, params, callback) => {
   console.log("executed query", text);
   return pool.query(text, params, callback);

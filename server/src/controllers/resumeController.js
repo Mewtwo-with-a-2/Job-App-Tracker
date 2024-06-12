@@ -10,8 +10,12 @@ resumeController.getResumes = async (req, res, next) => {
     const pullResumes = "SELECT * FROM resumes";
     const result = await DB.query(pullResumes);
     console.log(result);
+    res.locals.allResumes = result.rows;
+    return next();
   } catch (err) {
-    console.log("Error in getResumes function: " + err);
+    return next(
+      console.log("Error in getResumes function: " + err)
+    );
   }
 };
 
@@ -54,7 +58,7 @@ resumeController.saveResume = async (req, res, next) => {
     } catch (err) {
       console.log("Error saving resume: " + err);
       return res.status(500).send("Error saving resume");
-    }
+    }n
   });
 };
 export default resumeController;

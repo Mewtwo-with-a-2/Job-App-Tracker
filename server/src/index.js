@@ -12,9 +12,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path(__dirname, "../client")));
 
-// app.get('/', (req,res) => {
-//   res.send('')
-// })
+app.get('/', (req,res) => {
+  res.send('The server is running!')
+})
 
 // app.use(
 //   session({
@@ -27,7 +27,7 @@ app.use(express.static(path(__dirname, "../client")));
 
 app.use('/accounts', accountsRouter);
 app.use('/applications', applicationsRouter);
-app.use("/resume", resumeRouter);
+app.use("/resumes", resumeRouter);
 
 //Global error handler
 app.use((err, req, res, next) => {
@@ -49,3 +49,5 @@ app.use("*", (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);
 });
+
+export default app;
