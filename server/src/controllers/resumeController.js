@@ -5,15 +5,44 @@ import fs from "fs";
 import path from "path";
 const resumeController = {};
 
+// test
+resumeController.testDBConnection = async () => {
+  try {
+    // Just to test the database connection, no need to execute any query
+    console.log("Database connection successful");
+    return { message: "Database connection successful" };
+  } catch (error) {
+    throw error;
+  }
+};
+
+// resumeController.getResumes = async (req, res, next) => {
+//   try {
+//     const pullResumes = "SELECT * FROM resumes";
+//     const result = await DB.query(pullResumes);
+//     console.log(result);
+//   } catch (err) {
+//     console.log("Error in getResumes function: " + err);
+//   }
+// };
+
+// test
 resumeController.getResumes = async (req, res, next) => {
   try {
     const pullResumes = "SELECT * FROM resumes";
     const result = await DB.query(pullResumes);
-    console.log(result);
+    res.status(200).json(result.rows); 
+    return next();
   } catch (err) {
     console.log("Error in getResumes function: " + err);
+    return next({
+      log: "Error in getResumes function",
+      status: 500,
+      message: { err: "Error fetching resumes" },
+    });
   }
 };
+
 
 resumeController.insertResume = async (req, res, next) => {
   try {
